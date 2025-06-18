@@ -1,0 +1,4 @@
+Gradio
+numpy 
+scipy
+matplotlib
