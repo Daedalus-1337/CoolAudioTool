@@ -28,6 +28,7 @@ with gr.Blocks() as demo:
     gr.Markdown("## 🎚️ Additive Synth with Phase, Waveform Type & Graph")
 
     num_waves = gr.Slider(1, 10, value=2, step=1, label="Number of Oscillators")
+    duration_slider = gr.Slider(1, 10, value=1, step=1, label="Output Lenght")
     regenerate_btn = gr.Button("🔁 Regenerate Controls")
     sliders_container = gr.Column()
     generate_btn = gr.Button("▶️ Generate Audio & Preview")
@@ -42,7 +43,7 @@ with gr.Blocks() as demo:
     with sliders_container:
         for i in range(max_sliders):
             with gr.Row():
-                freq = gr.Slider(20, 2000, value=440, label=f"Freq {i+1} (Hz)", visible=(i < 2))
+                freq = gr.Slider(5, 2000, value=120, step=1, label=f"Freq {i+1} (Hz)", visible=(i < 2))
                 amp = gr.Slider(0.0, 1.0, value=0.5, label="Amp", visible=(i < 2))
                 phase = gr.Slider(0, 360, value=0, label="Phase (°)", visible=(i < 2))
                 wave_type = gr.Dropdown(choices=["Sine", "Square", "Saw"], value="Sine", label="Waveform", visible=(i < 2))
@@ -72,7 +73,7 @@ with gr.Blocks() as demo:
 
         # Plot the first 1000 samples
         fig, ax = plt.subplots(figsize=(8, 3))
-        ax.plot(waveform[:1000])
+        ax.plot(waveform[:2000])
         ax.set_title("Summed Waveform Preview")
         ax.set_xlabel("Sample")
         ax.set_ylabel("Amplitude")
